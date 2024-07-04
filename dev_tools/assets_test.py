@@ -34,7 +34,7 @@ def detect_ocr(file: str, target: RuleOcr):
 
 
 # 图片文件路径 可以是相对路径
-IMAGE_FILE = r"C:\Users\Ryland\Desktop\2024-07-31_21-14-21-574521.png"
+IMAGE_FILE = r"D:\workspaces\py\OnmyojiAutoScript\log\error\17200757427562024-07-04_14-49-02-558641.png"
 if __name__ == '__main__':
     from tasks.SixRealms.assets import SixRealmsAssets
     from tasks.GameUi.assets import GameUiAssets
