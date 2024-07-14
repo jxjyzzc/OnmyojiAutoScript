@@ -67,12 +67,6 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, ExplorationAssets):
             logger.critical(f'Not find {explorationConfig.exploration_config.exploration_level} or'
                             f' Enter {explorationConfig.exploration_config.exploration_level} failed!')
             raise RequestHumanTakeover
-        con_scrolls = self.config.exploration.scrolls
-        # 判断是否绘卷模式，设置探索次数
-        if con_scrolls.scrolls_on:
-            exploration_count = 50
-        else:
-            exploration_count = explorationConfig.exploration_config.current_exploration_count
 
         # 探索
         exploration_count = explorationConfig.exploration_config.current_exploration_count
@@ -81,13 +75,13 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, ExplorationAssets):
             count = 0
             while count < exploration_count:
                 if self.wait_until_appear(self.I_E_EXPLORATION_CLICK, wait_time=1):
+                    # 如果突破卷超出设定数量，退出循环，去打个突
+                    con_scrolls = self.config.exploration.scrolls
                     # 如果打开绘卷模式
                     if con_scrolls.scrolls_on:
                         if con_scrolls.scrolls_cd > 0:
-
                             self.screenshot()
                             cu, res, total = self.O_REALM_RAID_NUMBER1.ocr(self.device.image)
-                            # 如果突破卷超出设定数量，去打个突
                             if cu >= con_scrolls.scrolls_number:
                                 # 设定下次探索时间
                                 next_run = datetime.now() + timedelta(minutes=con_scrolls.scrolls_cd)
