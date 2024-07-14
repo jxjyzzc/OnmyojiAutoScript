@@ -74,18 +74,20 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, ExplorationAssets):
         else:
             exploration_count = explorationConfig.exploration_config.current_exploration_count
 
-        logger.info("exploration_count:" + str(exploration_count))
+        # 探索
+        exploration_count = explorationConfig.exploration_config.current_exploration_count
+        # logger.info("探索执行次数：" + str(exploration_count))
         if exploration_count > 0:
             count = 0
             while count < exploration_count:
                 if self.wait_until_appear(self.I_E_EXPLORATION_CLICK, wait_time=1):
+                    # 如果突破卷超出设定数量，退出循环，去打个突
+                    con_scrolls = self.config.exploration.scrolls
                     # 如果打开绘卷模式
                     if con_scrolls.scrolls_on:
                         if con_scrolls.scrolls_cd > 0:
-
                             self.screenshot()
                             cu, res, total = self.O_REALM_RAID_NUMBER1.ocr(self.device.image)
-                            # 如果突破卷超出设定数量，去打个突
                             if cu >= con_scrolls.scrolls_number:
                                 # 设定下次探索时间
                                 next_run = datetime.now() + timedelta(minutes=con_scrolls.scrolls_cd)
