@@ -98,6 +98,6 @@ class DokanAssets:
 	# 道馆里找文字：后挑战馆主 
 	O_DOKAN_BOSS_WAITING = RuleOcr(roi=(603,148,130,32), area=(603,148,130,32), mode="Single", method="Default", keyword="馆主", name="dokan_boss_waiting")
 	# 道馆里找文字：后关闭 
-	O_DOKAN_SUCCEEDED = RuleOcr(roi=(655,76,49,28), area=(655,76,49,28), mode="Full", method="Default", keyword="关闭", name="dokan_succeeded")
+	O_DOKAN_SUCCEEDED = RuleOcr(roi=(1122,546,92,51), area=(1122,546,92,51), mode="Full", method="Default", keyword="关闭", name="dokan_succeeded")
 
 
