@@ -7,5 +7,59 @@
     "method": "Template matching",
     "threshold": 0.9,
     "description": "用于判断是否滑到底了"
+  },
+  {
+    "itemName": "aa_can_synthetic_1",
+    "imageName": "a_aa_can_synthetic_1.png",
+    "roiFront": "494,176,70,26",
+    "roiBack": "485,170,92,416",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "判断可合成的方案1"
+  },
+  {
+    "itemName": "aa_can_synthetic_2",
+    "imageName": "a_aa_can_synthetic_2.png",
+    "roiFront": "484,174,86,416",
+    "roiBack": "484,174,86,416",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "判断可合成的方案2"
+  },
+  {
+    "itemName": "aa_start_synthetic_button",
+    "imageName": "a_aa_start_synthetic_button.png",
+    "roiFront": "573,599,110,48",
+    "roiBack": "573,599,110,48",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "进行合成按钮"
+  },
+  {
+    "itemName": "aa_sure_synthetic_button",
+    "imageName": "a_aa_sure_synthetic_button.png",
+    "roiFront": "659,538,171,57",
+    "roiBack": "659,538,171,57",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "确认合成按钮"
+  },
+  {
+    "itemName": "a_back_effect",
+    "imageName": "a_a_back_effect.png",
+    "roiFront": "1201,154,63,109",
+    "roiBack": "1201,154,63,109",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "返回挂卡界面"
+  },
+  {
+    "itemName": "aa_max_count",
+    "imageName": "a_aa_max_count.png",
+    "roiFront": "483,603,44,44",
+    "roiBack": "483,603,44,44",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "description"
   }
 ]

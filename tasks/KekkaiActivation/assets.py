@@ -20,11 +20,24 @@ class KekkaiActivationAssets:
 	# Ocr Rule Assets
 	# 这张卡一共有多少小时 
 	O_CARD_ALL_TIME = RuleOcr(roi=(926,262,95,31), area=(926,262,95,31), mode="Duration", method="Default", keyword="", name="card_all_time")
+	# 判断滑到底部合成方案的序号 
+	O_SYNTHETIC_END_NO = RuleOcr(roi=(191,436,32,150), area=(191,436,32,150), mode="Digit", method="Default", keyword="", name="synthetic_end_no")
 
 
 	# Swipe Rule Assets
 	# description 
 	S_CARDS_SWIPE = RuleSwipe(roi_front=(178,401,23,23), roi_back=(176,168,29,24), mode="default", name="cards_swipe")
+	# 合成卡滑动区域 
+	S_SYNTHETIC_CARD_SWIPE = RuleSwipe(roi_front=(180,381,400,137), roi_back=(180,237,400,137), mode="vector", name="synthetic_card_swipe")
+
+
+	# Long Click Rule Assets
+	# description 
+	L_GET_REWARD_CARD_1 = RuleLongClick(roi_front=(177,184,100,100), roi_back=(177,184,100,100), duration=0, name="get_reward_card_1")
+	# description 
+	L_GET_REWARD_CARD_2 = RuleLongClick(roi_front=(184,505,100,100), roi_back=(184,505,100,100), duration=0, name="get_reward_card_2")
+	# description 
+	L_GET_REWARD_CARD_3 = RuleLongClick(roi_front=(1043,343,100,100), roi_back=(1043,343,100,100), duration=0, name="get_reward_card_3")
 
 
 	# Image Rule Assets
@@ -76,11 +89,27 @@ class KekkaiActivationAssets:
 	I_A_DEMOUNT = RuleImage(roi_front=(939,575,55,47), roi_back=(903,551,107,91), threshold=0.8, method="Template matching", file="./tasks/KekkaiActivation/a/a_a_demount.png")
 	# 斗鱼3 
 	I_A_HARVEST_FISH_3 = RuleImage(roi_front=(891,165,57,39), roi_back=(854,128,132,124), threshold=0.8, method="Template matching", file="./tasks/KekkaiActivation/a/a_a_harvest_fish_3.png")
+	# description 
+	I_A_SYNTHETIC_CARD = RuleImage(roi_front=(1203,283,62,106), roi_back=(1196,277,72,115), threshold=0.8, method="Template matching", file="./tasks/KekkaiActivation/a/a_a_synthetic_card.png")
+	# description 
+	I_A_SYNTHETIC_PLAN = RuleImage(roi_front=(583,115,46,44), roi_back=(583,115,46,44), threshold=0.8, method="Template matching", file="./tasks/KekkaiActivation/a/a_a_synthetic_plan.png")
 
 
 	# Image Rule Assets
 	# 用于判断是否滑到底了 
 	I_AA_SWIPE_BLOCK = RuleImage(roi_front=(124,622,35,32), roi_back=(117,612,50,51), threshold=0.9, method="Template matching", file="./tasks/KekkaiActivation/a/a_aa_swipe_block.png")
+	# 判断可合成的方案1 
+	I_AA_CAN_SYNTHETIC_1 = RuleImage(roi_front=(494,176,70,26), roi_back=(485,170,92,416), threshold=0.8, method="Template matching", file="./tasks/KekkaiActivation/a/a_aa_can_synthetic_1.png")
+	# 判断可合成的方案2 
+	I_AA_CAN_SYNTHETIC_2 = RuleImage(roi_front=(484,174,86,416), roi_back=(484,174,86,416), threshold=0.8, method="Template matching", file="./tasks/KekkaiActivation/a/a_aa_can_synthetic_2.png")
+	# 进行合成按钮 
+	I_AA_START_SYNTHETIC_BUTTON = RuleImage(roi_front=(573,599,110,48), roi_back=(573,599,110,48), threshold=0.8, method="Template matching", file="./tasks/KekkaiActivation/a/a_aa_start_synthetic_button.png")
+	# 确认合成按钮 
+	I_AA_SURE_SYNTHETIC_BUTTON = RuleImage(roi_front=(659,538,171,57), roi_back=(659,538,171,57), threshold=0.8, method="Template matching", file="./tasks/KekkaiActivation/a/a_aa_sure_synthetic_button.png")
+	# 返回挂卡界面 
+	I_A_BACK_EFFECT = RuleImage(roi_front=(1201,154,63,109), roi_back=(1201,154,63,109), threshold=0.8, method="Template matching", file="./tasks/KekkaiActivation/a/a_a_back_effect.png")
+	# description 
+	I_AA_MAX_COUNT = RuleImage(roi_front=(483,603,44,44), roi_back=(483,603,44,44), threshold=0.8, method="Template matching", file="./tasks/KekkaiActivation/a/a_aa_max_count.png")
 
 
 	# Image Rule Assets

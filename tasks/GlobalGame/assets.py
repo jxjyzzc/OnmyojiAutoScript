@@ -35,7 +35,7 @@ class GlobalGameAssets:
 
 	# Click Rule Assets
 	# description 
-	C_UI_REWARD = RuleClick(roi_front=(919,160,208,368), roi_back=(72,107,244,503), name="ui_reward")
+	C_UI_REWARD = RuleClick(roi_front=(330,277,208,368), roi_back=(73,203,244,503), name="ui_reward")
 
 
 	# Image Rule Assets

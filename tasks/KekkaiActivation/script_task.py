@@ -2,6 +2,7 @@
 # @author runhey
 # github https://github.com/runhey
 import time
+import random
 
 from cached_property import cached_property
 from datetime import datetime, timedelta
@@ -32,6 +33,7 @@ class ScriptTask(KU, KekkaiActivationAssets):
         if con.exchange_before:
             self.check_max_lv(con.shikigami_class)
         self.harvest_card()
+        self.synthetic_card()
 
         self.run_activation(con)
         while 1:
@@ -93,6 +95,8 @@ class ScriptTask(KU, KekkaiActivationAssets):
         退出的时候还是在挂卡界面而不是结界界面
         """
         self.goto_cards()
+        # 先合成多余结界卡
+        self.synthetic_card()
         # 太诡异了 为什么有这么长的动画, 那么长的动画先休息一会
         logger.hr('Start activation')
         time.sleep(0.5)
@@ -157,6 +161,7 @@ class ScriptTask(KU, KekkaiActivationAssets):
             if self.appear_then_click(self.I_SHI_CARD, interval=1):
                 continue
         logger.info('Enter card page')
+  
 
     def check_card_status(self, screenshot=False) -> bool:
         """
@@ -382,6 +387,110 @@ class ScriptTask(KU, KekkaiActivationAssets):
         self.appear_then_click(self.I_A_HARVEST_MOON_3)  # 太阴3
         self.appear_then_click(self.I_A_HARVEST_FISH_3)  # 斗鱼三
 
+    def synthetic_card(self):
+        """
+        合成结界卡
+        :param screenshot:
+        :return:
+        """ 
+        
+        """
+        进行合成方案
+        """
+        def run_plan():
+            swipe_count = 0
+            while 1:
+                if swipe_count == 0:
+                    text1 = []
+                    text2 = []
+                # 操作后等待界面加载完毕
+                # 找到可合成卡片方案并点击
+                can_synthetic_coord = None
+                if self.wait_until_appear(self.I_AA_CAN_SYNTHETIC_1,wait_time=2):
+                    can_synthetic_coord = self.I_AA_CAN_SYNTHETIC_1.coord()
+                # if self.wait_until_appear(self.I_AA_CAN_SYNTHETIC_2,wait_time=3):
+                #     can_synthetic_coord = self.I_AA_CAN_SYNTHETIC_2.coord()
+
+                if can_synthetic_coord is not None:
+                    # 可合成的图标需要在识别图像下方20像素的位置点击
+                    click_coord = (can_synthetic_coord[0],can_synthetic_coord[1]+20)
+                    logger.info(f'click_coord:{click_coord}')    
+                    self.device.click(click_coord[0],click_coord[1])
+                    # 点击当前合成方案后，调整合成次数到最大
+                    if self.appear_then_click(self.I_AA_MAX_COUNT, interval=1):
+                        self.click(self.I_AA_START_SYNTHETIC_BUTTON, interval=1)
+                        continue
+               
+                # 确认合成按钮会短时间消失所以用wait_until_appear
+                if self.wait_until_appear(self.I_AA_SURE_SYNTHETIC_BUTTON, wait_time=2):
+                    logger.info('find synthetic button,click it')
+                    self.ui_click(self.I_AA_SURE_SYNTHETIC_BUTTON,self.I_UI_REWARD,interval=1)
+                     # 合成成功后点击一下继续
+                    if self.appear(self.I_UI_REWARD):
+                        logger.info('find Reward box')
+                        while 1:
+                            self.screenshot()
+                            if not self.appear(self.I_UI_REWARD):
+                                break
+                            if self.ui_reward_appear_click():
+                                time.sleep(0.5)
+                                self.screenshot()
+                                continue  
+                    continue
+                # if self.appear_then_click(self.I_AA_SURE_SYNTHETIC_BUTTON, interval=1):
+                #     continue
+                        
+                  
+                # bug 合成提示界面也会滑动,会影响SYNTHETIC_END_NO判断
+                # 未找到可合成的卡片时向下滑动
+                compare1 = self.O_SYNTHETIC_END_NO.detect_and_ocr(self.device.image)
+                text1 = [result.ocr_text for result in compare1]
+                logger.info(f'compare1:{text1}')
+                if len(text1)>0:
+                    # 向上滑动
+                    self.swipe(self.S_SYNTHETIC_CARD_SWIPE, interval=1.5)
+                    swipe_count += 1
+                    time.sleep(0.3)
+                else:
+                    # 识别错误，重新识别
+                    continue    
+                self.screenshot()
+                compare2 = self.O_SYNTHETIC_END_NO.detect_and_ocr(self.device.image)
+                text2 = [result.ocr_text for result in compare2]
+                logger.info(f'compare2:{text2}')
+                # 相等时 滑动到最上层
+                if swipe_count>1:
+                    if len(text2)>0:
+                        if str(text1) == str(text2):
+                            logger.info('Synthetic end,back card effect')
+                            self.ui_click(self.I_UI_BACK_RED,self.I_A_SYNTHETIC_PLAN,interval=3)
+                            self.ui_click(self.I_A_BACK_EFFECT,self.I_A_AUTO_INVITE,interval=3)
+                            time.sleep(0.5)
+                            if swipe_count>2:
+                                break
+                        else:
+                            swipe_count=0
+                            logger.info('swipe_count reset')
+                            time.sleep(0.5)
+            
+            return
+
+
+        while 1:
+            self.screenshot()
+            time.sleep(0.3)
+            # 找到合成按钮并点击
+            if self.appear_then_click(self.I_A_SYNTHETIC_CARD, threshold=0.8):
+                logger.info('find Synthetic card button ')
+                continue
+            # 找到合成方案按钮并点击
+            if self.appear_then_click(self.I_A_SYNTHETIC_PLAN, threshold=0.8):
+                logger.info('start Synthetic plan button ')
+                run_plan()
+                break
+               
+                
+        return 
 
 if __name__ == "__main__":
     from module.config.config import Config
@@ -392,5 +501,5 @@ if __name__ == "__main__":
     d = Device(c)
 
     t = ScriptTask(c, d)
-    t.run()
-    # t.run_activation(t.config.kekkai_activation.activation_config)
+    # t.run()
+    t.run_activation(t.config.kekkai_activation.activation_config)

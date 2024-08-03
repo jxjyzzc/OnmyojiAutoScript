@@ -5,5 +5,12 @@
     "roiBack": "176,168,29,24",
     "mode": "default",
     "description": "description"
+  },
+  {
+    "itemName": "synthetic_card_swipe",
+    "roiFront": "180,381,400,137",
+    "roiBack": "180,237,400,137",
+    "mode": "vector",
+    "description": "合成卡滑动区域"
   }
 ]

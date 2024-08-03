@@ -7,5 +7,14 @@
     "method": "Default",
     "keyword": "",
     "description": "这张卡一共有多少小时"
+  },
+  {
+    "itemName": "synthetic_end_no",
+    "roiFront": "191,436,32,150",
+    "roiBack": "191,436,32,150",
+    "mode": "Digit",
+    "method": "Default",
+    "keyword": "",
+    "description": "判断滑到底部合成方案的序号"
   }
 ]

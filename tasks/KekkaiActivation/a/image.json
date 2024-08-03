@@ -214,5 +214,23 @@
     "method": "Template matching",
     "threshold": 0.8,
     "description": "斗鱼3"
+  },
+  {
+    "itemName": "a_synthetic_card",
+    "imageName": "a_a_synthetic_card.png",
+    "roiFront": "1203,283,62,106",
+    "roiBack": "1196,277,72,115",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "description"
+  },
+  {
+    "itemName": "a_synthetic_plan",
+    "imageName": "a_a_synthetic_plan.png",
+    "roiFront": "583,115,46,44",
+    "roiBack": "583,115,46,44",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "description"
   }
 ]

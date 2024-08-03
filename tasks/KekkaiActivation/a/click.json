@@ -1,0 +1,23 @@
+[
+  {
+    "itemName": "get_reward_card_1",
+    "roiFront": "177,184,100,100",
+    "roiBack": "177,184,100,100",
+    "duration": 0,
+    "description": "description"
+  },
+  {
+    "itemName": "get_reward_card_2",
+    "roiFront": "184,505,100,100",
+    "roiBack": "184,505,100,100",
+    "duration": 0,
+    "description": "description"
+  },
+  {
+    "itemName": "get_reward_card_3",
+    "roiFront": "1043,343,100,100",
+    "roiBack": "1043,343,100,100",
+    "duration": 0,
+    "description": "description"
+  }
+]
