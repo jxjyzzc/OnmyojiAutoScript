@@ -33,7 +33,8 @@ class ScriptTask(KU, KekkaiActivationAssets):
         if con.exchange_before:
             self.check_max_lv(con.shikigami_class)
         self.harvest_card()
-        self.synthetic_card()
+        if con.card_synthesis:
+            self.synthetic_card()
 
         self.run_activation(con)
         while 1:

@@ -17,6 +17,7 @@ class ActivationScheduler(Scheduler):
     failure_interval: TimeDelta = Field(default=TimeDelta(hours=10), description='failure_interval_help')
 
 class ActivationConfig(BaseModel):
+    card_synthesis: bool = Field(default=True, description='card_synthesis_help')
     card_rule: MultiLine = Field(default='auto', description='card_rule_help')
     exchange_before: bool = Field(default=True, description='exchange_before_help')
     exchange_max: bool = Field(default=True, description='exchange_max_help')
